@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* ── Paste into your index.css or globals.css ── */
+
+/* Smooth transitions on everything  */
+ *, *::before, *::after {
+  transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+
+/* Theme classes — use these as className in React */
+body            { background: var(--body-bg); }
+
+.theme-body     { background: var(--body-bg);  }
+.theme-header   { background: var(--card-bg);  }
+.theme-btn2     { color: var(--card-bg);  }
+.theme-card     { background: var(--text-main);  }
+.theme-text     { color: var(--text-main); }
+.theme-subtext  { color: var(--text-sub); }
+.theme-btn      { background: var(--btn-bg); border: 1.5px solid var(--border); color: #fff; }
+.theme-link     { color: var(--accent); }
+.theme-accent   { background: var(--accent); }
+.theme-divider  { border-color: var(--border); }
+
+/* Optional: apply to standard HTML tags globally */
+h1, h2, h3, h4 { color: var(--text-main); }
+p, span, li     { color: var(--text-sub); }
+a               { color: var(--accent); }
+
