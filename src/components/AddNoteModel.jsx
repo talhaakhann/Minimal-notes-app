@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from './Button'
 import NotesContainer from './NotesContainer'
 
+
 function AddNote({ addNote,closeModal  }) {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -9,12 +10,12 @@ function AddNote({ addNote,closeModal  }) {
     function Submit(e) {
         e.preventDefault();
         
-        if (title.length < 1 || title.length > 16) {
+        if (title.length < 1 || title.length > 20) {
             console.error("Please Enter Valid Title !");
             return;
         }
 
-       if (description.length < 1 || description.length > 24){
+       if (description.length < 1 || description.length >= 40){
             console.error("Please Enter Valid Description !");
             return;
         }

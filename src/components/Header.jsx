@@ -10,7 +10,7 @@ function Header({ setShowModal }) {
                   justify-between gap-4
                   px-4 sm:px-8 lg:px-20">
 
-        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold">
+        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold scroll-m-20 border-b pb-2 tracking-tight first:mt-0">
           My Notes
         </h1>
 

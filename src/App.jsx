@@ -6,50 +6,64 @@ import Button from "./components/Button"
 import Header from "./components/Header"
 import EmptyNotes from "./components/EmptyNotesPage"
 import { ThemeProvider } from "./ThemeContext"
+import Toast from "./components/Toast"
 
 function App() {
+  const [toast, setToast] = useState(null)
   const [notes, setNotes] = useState(() => {
-  try {
-    const data = localStorage.getItem("notes");
-    return data ? JSON.parse(data) : [];
-  } catch {
-    return [];
-  }
-});
 
+    try {
+      const data = localStorage.getItem("notes");
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  });
 
+  
   const [showModal, setShowModal] = useState(false);
-
+  
+  const showToast = (message, type) => {
+    setToast({ message, type })
+  }
 
   const addNote = (title, description) => {
     setNotes((prevNote) =>
       [...prevNote,
-      { title, description, date: new Date().toLocaleTimeString() }]
+      {
+        title,
+        description,
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }]
     )
+    showToast("Note saved ✦", "success")
   }
 
   const updateNote = (indexToUpdate, newTitle, newDescription) => {
     setNotes((prevNotes) =>
-        prevNotes.map((note, index) =>
-            index === indexToUpdate
-                ? { ...note, title: newTitle, description: newDescription }
-                : note
-        )
+      prevNotes.map((note, index) =>
+        index === indexToUpdate
+          ? { ...note, title: newTitle, description: newDescription }
+          : note
+      )
     )
-}
+     showToast("Note updated", "update")
+  }
 
 
   const deleteNote = (indexToDelete) => {
     setNotes((prevNote) =>
       prevNote.filter((note, index) => index !== indexToDelete)
     )
+    showToast("Note deleted", "delete")
   }
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
- 
+
 
   return (
     <ThemeProvider>
@@ -63,11 +77,18 @@ function App() {
             />
           )}
           {notes && notes.length > 0 ? (
-            <NotesCard notes={notes}  updateNote={updateNote} deleteNote={deleteNote} />
+            <NotesCard notes={notes} updateNote={updateNote} deleteNote={deleteNote} />
           ) : (
             <EmptyNotes />
           )}
         </div>
+      {toast && (
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                onClose={() => setToast(null)}
+            />
+        )}
       </div>
     </ThemeProvider>
   )

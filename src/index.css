@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
-/* ── Paste into your index.css or globals.css ── */
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-/* Smooth transitions on everything  */
+.animate-slide-up {
+    animation: slide-up 0.3s ease-out forwards;
+}
+
+
+
  *, *::before, *::after {
   transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
 
-/* Theme classes — use these as className in React */
 body            { background: var(--body-bg); }
 
 .theme-body     { background: var(--body-bg);  }

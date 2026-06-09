@@ -22,7 +22,7 @@ function NotesCard({ notes, deleteNote, updateNote }) {
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-8 mx-auto items-center'>
             {notes.map((note, index) => (
-                <NotesContainer key={index} className={"border-1 border-gray-300 rounded-2xl p-6 theme-header w-[360px]"}>
+                <NotesContainer key={index} className={"border-1 border-gray-300 rounded-2xl p-6   theme-header w-[360px]  transition-all duration-400 ease-in-out hover:-translate-y-2 hover:shadow-xl hover:scale-[1.02] cursor-pointer"}>
                     {editingIndex === index ? (
                         <>
                             <input
@@ -32,7 +32,7 @@ function NotesCard({ notes, deleteNote, updateNote }) {
                                 placeholder="Title"
                             />
                             <textarea
-                                className='w-full mb-4 font-bold theme-subtext bg-transparent border theme-header rounded-lg outline-none p-2 resize-none'
+                                className='w-full mb-4 font-bold theme-subtext bg-transparent border theme-header rounded-lg outline-none p-2 '
                                 rows={3}
                                 value={editDesc}
                                 onChange={(e) => setEditDesc(e.target.value)}
@@ -54,7 +54,7 @@ function NotesCard({ notes, deleteNote, updateNote }) {
                             <h1 className='text-2xl font-bold mb-4 theme-text'>{note.title}</h1>
                             <p className='mb-4 font-bold theme-subtext'>{note.description}</p>
                             <div className='flex'>
-                                <span className='flex-1 font-semibold mt-2 theme-text'>{note.date}</span>
+                                <span className='flex-1 font-semibold mt-2 theme-text'>📅 {note.date} &nbsp; </span>
                                 <button
                                     className="theme-btn p-2 cursor-pointer rounded-full font-semibold shadow-2xl mr-2"
                                     onClick={() => startEdit(index, note)}
