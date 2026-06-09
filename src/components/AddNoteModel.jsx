@@ -37,7 +37,7 @@ function AddNote({ addNote,closeModal  }) {
 
             {/* MODAL */}
             <div className="fixed inset-0 flex items-center justify-center z-50 ">
-                <NotesContainer className={"py-6 px-8 theme-body rounded-2xl shadow-xl w-[400px]"}>
+                <NotesContainer onClick={(e) => e.stopPropagation()}  className={"py-6 px-8 theme-body rounded-2xl shadow-xl w-[400px]"}>
                     
                     <h2 className='text-3xl font-bold text-center mb-4'>
                         Create New Note

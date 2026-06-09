@@ -9,8 +9,6 @@
     animation: slide-up 0.3s ease-out forwards;
 }
 
-
-
  *, *::before, *::after {
   transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }

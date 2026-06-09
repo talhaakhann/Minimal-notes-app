@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import React from 'react'
-import AddNote from "./components/AddNoteModel"
-import NotesCard from "./components/NotesCard"
+import { lazy, Suspense } from 'react'
+const AddNote=lazy(()=>import('./components/AddNoteModel'))
+const NotesCard =lazy(()=> import('./components/NotesCard'))
 import Button from "./components/Button"
 import Header from "./components/Header"
 import EmptyNotes from "./components/EmptyNotesPage"
@@ -76,19 +77,22 @@ function App() {
               closeModal={() => setShowModal(false)}
             />
           )}
+          <Suspense fallback={null}>
           {notes && notes.length > 0 ? (
+   
             <NotesCard notes={notes} updateNote={updateNote} deleteNote={deleteNote} />
           ) : (
             <EmptyNotes />
           )}
+        </Suspense>
         </div>
       {toast && (
-            <Toast
-                message={toast.message}
-                type={toast.type}
-                onClose={() => setToast(null)}
-            />
-        )}
+        <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast(null)}
+        />
+      )}
       </div>
     </ThemeProvider>
   )
