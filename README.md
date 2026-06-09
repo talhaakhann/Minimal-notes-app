@@ -1,6 +1,6 @@
 # Minimal Notes App
 
-A simple persistent notes app built with React, Express, and SQLite.
+A simple persistent notes app built with React.
 
 ## Features
 
