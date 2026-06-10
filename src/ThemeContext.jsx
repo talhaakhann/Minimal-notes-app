@@ -72,18 +72,14 @@ function buildTheme(hex) {
 const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [colorIndex, setColorIndex] = useState(8); // default: blue
-  console.log(colorIndex);
-  
+  const [colorIndex, setColorIndex] = useState(8); 
 
-  // Queue holds all 22 indexes shuffled — cycles through every one before repeating
   const queueRef = useRef(buildQueue(15));
   const posRef   = useRef(0);
 
   const current = COLORS[colorIndex];
   const theme   = buildTheme(current.hex);
 
-  // Apply CSS variables to <html> whenever color changes
   useEffect(() => {
     const root = document.documentElement.style;
     root.setProperty("--body-bg",   theme.bodyBg);
@@ -96,7 +92,7 @@ export function ThemeProvider({ children }) {
   }, [colorIndex]);
 
   function randomize() {
-    // Reshuffle once the full queue is exhausted
+ 
     if (posRef.current >= queueRef.current.length) {
       queueRef.current = buildQueue(colorIndex);
       posRef.current   = 0;

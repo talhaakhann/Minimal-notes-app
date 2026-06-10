@@ -59,7 +59,7 @@ function AddNote({ addNote,closeModal  }) {
                             placeholder='Enter Description...'
                         />
 
-                        <div className='flex justify-center gap-10 mt-2'>
+                        <div className='flex justify-center gap-8 mt-2'>
                             <Button type={"submit"} children={"Save"} className={"theme-card theme-btn2  "} />
                             <Button onClick={closeModal} children={"Cancel"} className={"theme-header  border-1 border-gray-100"}/>
                         </div>
