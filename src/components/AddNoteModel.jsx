@@ -1,22 +1,28 @@
 import React, { useState } from 'react'
 import Button from './Button'
 import NotesContainer from './NotesContainer'
+import Toast from "./Toast"
 
 
-function AddNote({ addNote,closeModal  }) {
+function AddNote({ addNote, closeModal }) {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [toast, setToast] = useState(null)
+
+    const showToast = (message, type) => {
+        setToast({ message, type })
+    }
 
     function Submit(e) {
         e.preventDefault();
-        
-        if (title.length < 1 || title.length > 20) {
-            console.error("Please Enter Valid Title !");
+
+        if (title.trim().length === 0 || title.trim().length > 25) {
+            showToast("Title: 1-25 characters.", "error");
             return;
         }
 
-       if (description.length < 1 || description.length >= 40){
-            console.error("Please Enter Valid Description !");
+        if (description.trim().length === 0 || description.trim().length > 40) {
+            showToast("Description: 1–40 characters.", "error");
             return;
         }
 
@@ -25,20 +31,20 @@ function AddNote({ addNote,closeModal  }) {
 
         setTitle("");
         setDescription("");
-        closeModal(); 
+        closeModal();
     }
     return (
-              <>
+        <>
             {/* BACKDROP */}
-            <div 
+            <div
                 className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
                 onClick={closeModal}
             />
 
             {/* MODAL */}
             <div className="fixed inset-0 flex items-center justify-center z-50 ">
-                <NotesContainer onClick={(e) => e.stopPropagation()}  className={"py-6 px-8 theme-body rounded-2xl shadow-xl w-[400px]"}>
-                    
+                <NotesContainer onClick={(e) => e.stopPropagation()} className={"py-6 px-8 theme-body rounded-2xl shadow-xl w-[400px]"}>
+
                     <h2 className='text-3xl font-bold text-center mb-4'>
                         Create New Note
                     </h2>
@@ -61,10 +67,17 @@ function AddNote({ addNote,closeModal  }) {
 
                         <div className='flex justify-center gap-8 mt-2'>
                             <Button type={"submit"} children={"Save"} className={"theme-card theme-btn2  "} />
-                            <Button onClick={closeModal} children={"Cancel"} className={"theme-header  border-1 border-gray-100"}/>
+                            <Button onClick={closeModal} children={"Cancel"} className={"theme-header  border-1 border-gray-100"} />
                         </div>
                     </form>
                 </NotesContainer>
+                {toast && (
+                    <Toast
+                        message={toast.message}
+                        type={toast.type}
+                        onClose={() => setToast(null)}
+                    />
+                )}
             </div>
         </>
 

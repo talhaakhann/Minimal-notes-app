@@ -9,7 +9,8 @@ function Toast({ message, type = "success", onClose }) {
     const icons = {
         success: "✓",
         delete: "🗑️",
-        update: "✏️"
+        update: "✏️",
+        error:"🚫"
     }
 
     return (
